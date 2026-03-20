@@ -71,14 +71,9 @@
     .avatar {
       width: 88px; height: 88px; flex-shrink: 0;
       border-radius: 50%;
-      background: var(--bg-card);
       border: 2px solid var(--accent);
-      display: flex; align-items: center; justify-content: center;
-      font-family: var(--mono);
-      font-size: 28px;
-      color: var(--accent);
-      letter-spacing: -2px;
-      font-weight: 700;
+      overflow: hidden;
+      object-fit: cover;
     }
 
     .header-text h1 {
@@ -329,7 +324,7 @@
 <header>
   <div class="container">
     <div class="header-inner">
-      <div class="avatar">BM</div>
+      <img class="avatar" src="IMG_3939.jpeg" alt="Bouama Mehdi">
       <div class="header-text">
         <h1>Bouama Mehdi</h1>
         <div class="subtitle">// Embedded Systems Engineer · FPGA Designer · Low-Level Enthusiast</div>
