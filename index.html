@@ -1,629 +1,481 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Bouama Mehdi — Embedded Systems Engineer</title>
-  <style>
-    /* ── Reset & Base ── */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Bouama Mehdi, M1 E3A student at Université Paris-Saclay focused on embedded systems, FPGA, low-level C, STM32, Linux and autonomous systems.">
+  <meta name="theme-color" content="#0d1117">
+  <meta name="author" content="Bouama Mehdi">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://mahdidou711.github.io/">
+  <link rel="icon" href="assets/profile.jpg" type="image/jpeg">
 
-    :root {
-      --bg:        #0d1117;
-      --bg-card:   #161b22;
-      --bg-hover:  #1c2333;
-      --border:    #30363d;
-      --accent:    #39d353;
-      --accent2:   #58a6ff;
-      --text:      #c9d1d9;
-      --text-dim:  #8b949e;
-      --text-head: #e6edf3;
-      --tag-bg:    #1f2d1f;
-      --tag-border:#2ea043;
-      --tag-blue:  #1a2a3a;
-      --tag-blue-b:#388bfd;
-      --tag-gray:  #21262d;
-      --tag-gray-b:#484f58;
-      --mono:      'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'Courier New', monospace;
-      --sans:      -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
-    }
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Bouama Mehdi | Embedded Systems, FPGA & Low-Level Software">
+  <meta property="og:description" content="Portfolio focused on embedded systems, FPGA/VHDL, STM32, Linux, low-level C and autonomous systems.">
+  <meta property="og:url" content="https://mahdidou711.github.io/">
+  <meta property="og:image" content="https://mahdidou711.github.io/assets/profile.jpg">
 
-    html { scroll-behavior: smooth; }
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Bouama Mehdi | Embedded Systems, FPGA & Low-Level Software">
+  <meta name="twitter:description" content="M1 E3A student at Université Paris-Saclay focused on hardware/software integration, VHDL, STM32, Linux and autonomous systems.">
+  <meta name="twitter:image" content="https://mahdidou711.github.io/assets/profile.jpg">
 
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: var(--sans);
-      font-size: 15px;
-      line-height: 1.7;
-      min-height: 100vh;
-    }
+  <title>Bouama Mehdi | Embedded Systems, FPGA & Low-Level Software</title>
+  <link rel="stylesheet" href="styles.css">
 
-    /* ── Layout ── */
-    .container {
-      max-width: 860px;
-      margin: 0 auto;
-      padding: 0 24px;
-    }
-
-    /* ── Header ── */
-    header {
-      border-bottom: 1px solid var(--border);
-      padding: 56px 0 40px;
-      position: relative;
-      overflow: hidden;
-    }
-    header::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0; height: 3px;
-      background: linear-gradient(90deg, var(--accent), var(--accent2), var(--accent));
-      background-size: 200% 100%;
-      animation: shimmer 3s linear infinite;
-    }
-    @keyframes shimmer {
-      0%   { background-position: -200% 0; }
-      100% { background-position:  200% 0; }
-    }
-
-    .header-inner { display: flex; align-items: flex-start; gap: 32px; }
-
-    .avatar {
-      width: 88px; height: 88px; flex-shrink: 0;
-      border-radius: 50%;
-      border: 2px solid var(--accent);
-      overflow: hidden;
-      object-fit: cover;
-    }
-
-    .header-text h1 {
-      font-size: 2rem;
-      font-weight: 700;
-      color: var(--text-head);
-      letter-spacing: -0.5px;
-    }
-    .header-text .subtitle {
-      font-family: var(--mono);
-      font-size: 0.8rem;
-      color: var(--accent);
-      margin: 6px 0 14px;
-      letter-spacing: 0.5px;
-    }
-    .header-text blockquote {
-      font-style: italic;
-      color: var(--text-dim);
-      font-size: 0.88rem;
-      border-left: 3px solid var(--accent2);
-      padding-left: 12px;
-      max-width: 560px;
-    }
-
-    /* ── Nav ── */
-    nav {
-      background: var(--bg-card);
-      border-bottom: 1px solid var(--border);
-      position: sticky; top: 0; z-index: 100;
-    }
-    nav ul {
-      display: flex; list-style: none; gap: 0;
-      overflow-x: auto;
-    }
-    nav a {
-      display: block;
-      padding: 12px 18px;
-      color: var(--text-dim);
-      text-decoration: none;
-      font-size: 0.82rem;
-      font-family: var(--mono);
-      white-space: nowrap;
-      transition: color 0.15s, border-bottom 0.15s;
-      border-bottom: 2px solid transparent;
-    }
-    nav a:hover { color: var(--text-head); border-bottom-color: var(--accent); }
-
-    /* ── Sections ── */
-    main { padding: 48px 0 80px; }
-    section { margin-bottom: 56px; }
-
-    .section-label {
-      font-family: var(--mono);
-      font-size: 0.7rem;
-      color: var(--accent);
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      margin-bottom: 6px;
-    }
-    h2 {
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: var(--text-head);
-      border-bottom: 1px solid var(--border);
-      padding-bottom: 8px;
-      margin-bottom: 24px;
-    }
-    h3 {
-      font-size: 1rem;
-      font-weight: 600;
-      color: var(--text-head);
-      margin-bottom: 6px;
-    }
-
-    p { margin-bottom: 12px; }
-    p:last-child { margin-bottom: 0; }
-
-    a { color: var(--accent2); text-decoration: none; }
-    a:hover { text-decoration: underline; }
-
-    /* ── Skills Grid ── */
-    .skills-group { margin-bottom: 28px; }
-    .skills-group h3 {
-      font-family: var(--mono);
-      font-size: 0.78rem;
-      color: var(--accent2);
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 10px;
-    }
-    .skill-item {
-      display: flex; gap: 8px; align-items: baseline;
-      padding: 6px 0;
-      border-bottom: 1px solid var(--border);
-      font-size: 0.88rem;
-    }
-    .skill-item:last-child { border-bottom: none; }
-    .skill-name {
-      font-family: var(--mono);
-      color: var(--text-head);
-      min-width: 90px;
-      font-size: 0.85rem;
-    }
-    .skill-desc { color: var(--text-dim); font-size: 0.83rem; }
-
-    /* ── Tag system ── */
-    .tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0; }
-    .tag {
-      display: inline-block;
-      padding: 2px 10px;
-      border-radius: 20px;
-      font-family: var(--mono);
-      font-size: 0.72rem;
-      font-weight: 500;
-      white-space: nowrap;
-    }
-    .tag-green  { background: var(--tag-bg);   color: var(--accent);   border: 1px solid var(--tag-border); }
-    .tag-blue   { background: var(--tag-blue);  color: var(--accent2);  border: 1px solid var(--tag-blue-b); }
-    .tag-gray   { background: var(--tag-gray);  color: var(--text-dim); border: 1px solid var(--tag-gray-b); }
-
-    /* ── Cards (projects, experience) ── */
-    .card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 22px 24px;
-      margin-bottom: 16px;
-      transition: border-color 0.15s, background 0.15s;
-    }
-    .card:hover { border-color: var(--accent2); background: var(--bg-hover); }
-
-    .card-header {
-      display: flex; align-items: baseline; justify-content: space-between;
-      flex-wrap: wrap; gap: 8px;
-      margin-bottom: 4px;
-    }
-    .card-title {
-      font-size: 1rem;
-      font-weight: 600;
-      color: var(--text-head);
-    }
-    .card-meta {
-      font-family: var(--mono);
-      font-size: 0.72rem;
-      color: var(--text-dim);
-    }
-    .card-sub {
-      font-size: 0.82rem;
-      color: var(--accent2);
-      margin-bottom: 10px;
-      font-family: var(--mono);
-    }
-    .card p { font-size: 0.88rem; color: var(--text); margin-top: 10px; }
-
-    .badge-wip {
-      display: inline-block;
-      background: #2a1f05;
-      color: #e3b341;
-      border: 1px solid #9e6a03;
-      border-radius: 4px;
-      font-family: var(--mono);
-      font-size: 0.65rem;
-      padding: 1px 7px;
-      margin-left: 8px;
-      vertical-align: middle;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
-    /* ── Education Table ── */
-    .edu-table { width: 100%; border-collapse: collapse; font-size: 0.87rem; }
-    .edu-table th {
-      font-family: var(--mono);
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      color: var(--accent2);
-      text-align: left;
-      padding: 8px 12px 8px 0;
-      border-bottom: 1px solid var(--border);
-    }
-    .edu-table td {
-      padding: 10px 12px 10px 0;
-      border-bottom: 1px solid var(--border);
-      vertical-align: top;
-      color: var(--text);
-    }
-    .edu-table td strong { color: var(--text-head); }
-    .edu-table tr:last-child td { border-bottom: none; }
-
-    /* ── Languages ── */
-    .lang-row {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 8px 0;
-      border-bottom: 1px solid var(--border);
-      font-size: 0.87rem;
-    }
-    .lang-row:last-child { border-bottom: none; }
-    .lang-name { color: var(--text-head); font-weight: 500; }
-    .lang-level {
-      font-family: var(--mono);
-      font-size: 0.75rem;
-      color: var(--accent);
-    }
-
-    /* ── Contact ── */
-    .contact-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 12px;
-    }
-    .contact-item {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 14px 16px;
-      display: flex; align-items: center; gap: 12px;
-      transition: border-color 0.15s;
-    }
-    .contact-item:hover { border-color: var(--accent2); }
-    .contact-icon { font-size: 1.1rem; }
-    .contact-label { font-size: 0.7rem; color: var(--text-dim); font-family: var(--mono); }
-    .contact-value { font-size: 0.85rem; color: var(--text-head); }
-    .contact-value a { color: var(--accent2); }
-
-    /* ── Footer ── */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 24px 0;
-      text-align: center;
-      font-family: var(--mono);
-      font-size: 0.72rem;
-      color: var(--text-dim);
-    }
-    footer span { color: var(--accent); }
-
-    /* ── Responsive ── */
-    @media (max-width: 600px) {
-      .header-inner { flex-direction: column; gap: 16px; }
-      .header-text h1 { font-size: 1.5rem; }
-      nav a { padding: 10px 12px; font-size: 0.75rem; }
-    }
-  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Bouama Mehdi",
+    "url": "https://mahdidou711.github.io/",
+    "image": "https://mahdidou711.github.io/assets/profile.jpg",
+    "email": "mailto:mehdi.bouama.pro@gmail.com",
+    "sameAs": [
+      "https://github.com/mahdidou711",
+      "https://www.linkedin.com/in/mehdi-bouama/"
+    ],
+    "affiliation": {
+      "@type": "CollegeOrUniversity",
+      "name": "Université Paris-Saclay"
+    },
+    "knowsAbout": [
+      "Embedded systems",
+      "FPGA",
+      "VHDL",
+      "STM32",
+      "Linux",
+      "Low-level C",
+      "Autonomous systems"
+    ]
+  }
+  </script>
 </head>
 <body>
+  <a class="skip-link" href="#main">Skip to main content</a>
 
-<!-- ══ HEADER ══ -->
-<header>
-  <div class="container">
-    <div class="header-inner">
-      <img class="avatar" src="IMG_3939.jpeg" alt="Bouama Mehdi">
-      <div class="header-text">
-        <h1>Bouama Mehdi</h1>
-        <div class="subtitle">// Embedded Systems Engineer · FPGA Designer · Low-Level Enthusiast</div>
-        <blockquote>
-          "From bare metal registers to autonomous vehicles — I build systems that talk directly to hardware."
-        </blockquote>
+  <header class="site-header">
+    <nav class="nav" aria-label="Primary navigation">
+      <a class="brand" href="#top" aria-label="Bouama Mehdi home">
+        <span class="brand-mark" aria-hidden="true">BM</span>
+        <span>Bouama Mehdi</span>
+      </a>
+      <div class="nav-links">
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#experience">Experience</a>
+        <a href="#contact">Contact</a>
       </div>
-    </div>
-  </div>
-</header>
+    </nav>
+  </header>
 
-<!-- ══ NAV ══ -->
-<nav>
-  <div class="container">
-    <ul>
-      <li><a href="#about">About</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#experience">Experience</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#education">Education</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-  </div>
-</nav>
+  <main id="main">
+    <section class="hero section-band" id="top" aria-labelledby="hero-title">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">M1 E3A · Université Paris-Saclay</p>
+          <h1 id="hero-title">Bouama Mehdi</h1>
+          <p class="hero-title">Embedded Systems · FPGA · Low-Level Software</p>
+          <p class="hero-subtitle">
+            M1 E3A student at Université Paris-Saclay, focused on hardware/software integration,
+            VHDL, STM32, Linux and autonomous systems.
+          </p>
+          <div class="hero-actions" aria-label="Main links">
+            <a class="button button-primary" href="#projects">View Projects</a>
+            <a class="button button-secondary" href="#contact">Contact Me</a>
+            <a class="button button-ghost" href="https://github.com/mahdidou711" rel="me">GitHub</a>
+            <a class="button button-ghost" href="https://www.linkedin.com/in/mehdi-bouama/" rel="me">LinkedIn</a>
+          </div>
+        </div>
 
-<!-- ══ MAIN ══ -->
-<main>
-<div class="container">
-
-  <!-- ABOUT -->
-  <section id="about">
-    <div class="section-label">01 / profile</div>
-    <h2>About Me</h2>
-    <p>
-      I am a Master's student in Embedded Systems and Computer Architecture (M1 E3A) at Université Paris-Saclay,
-      one of France's top engineering universities. My work lives at the intersection of hardware and software:
-      I design digital logic in VHDL, program microcontrollers without abstraction layers, and optimize code at
-      the register level.
-    </p>
-    <p>
-      I started building things with microcontrollers during my undergraduate years in Algiers, where I assembled
-      PCBs by hand and wrote firmware from scratch. That hands-on foundation drives everything I do today. Whether
-      it is a custom STM32 driver, an FPGA arithmetic unit, or a lidar-driven autonomous car, I care about
-      understanding how every layer of the system actually works.
-    </p>
-    <p>
-      Outside the lab, I train at the gym, explore FPGA projects for fun, and keep refining my Linux environment.
-      I believe that engineers who stay curious outside of class build the best instincts inside it.
-    </p>
-  </section>
-
-  <!-- SKILLS -->
-  <section id="skills">
-    <div class="section-label">02 / technical stack</div>
-    <h2>Core Skills</h2>
-
-    <div class="skills-group">
-      <h3>Languages</h3>
-      <div class="skill-item"><span class="skill-name">C</span><span class="skill-desc">bare-metal embedded, CMSIS, memory management, performance optimization</span></div>
-      <div class="skill-item"><span class="skill-name">C++</span><span class="skill-desc">object-oriented design, templates, operator overloading</span></div>
-      <div class="skill-item"><span class="skill-name">VHDL</span><span class="skill-desc">RTL design, FSMs, arithmetic units, testbenches</span></div>
-      <div class="skill-item"><span class="skill-name">Python</span><span class="skill-desc">signal processing, image processing, data pipelines, scientific computing</span></div>
-    </div>
-
-    <div class="skills-group">
-      <h3>FPGA &amp; Digital Design</h3>
-      <div class="skill-item"><span class="skill-name">RTL</span><span class="skill-desc">design and synthesis in VHDL</span></div>
-      <div class="skill-item"><span class="skill-name">Simulation</span><span class="skill-desc">verification with ModelSim</span></div>
-      <div class="skill-item"><span class="skill-name">Toolchains</span><span class="skill-desc">Quartus (Intel/Altera), Vivado (Xilinx)</span></div>
-      <div class="skill-item"><span class="skill-name">Integration</span><span class="skill-desc">board integration and timing constraint management</span></div>
-    </div>
-
-    <div class="skills-group">
-      <h3>Embedded Systems</h3>
-      <div class="skill-item"><span class="skill-name">MCUs</span><span class="skill-desc">STM32, ESP32</span></div>
-      <div class="skill-item"><span class="skill-name">Protocols</span><span class="skill-desc">I2C, SPI, UART</span></div>
-      <div class="skill-item"><span class="skill-name">Hardware</span><span class="skill-desc">PCB design, SMD assembly, prototyping, hardware validation</span></div>
-    </div>
-
-    <div class="skills-group">
-      <h3>Tools &amp; Environment</h3>
-      <div class="skill-item"><span class="skill-name">Linux</span><span class="skill-desc">daily driver, shell scripting, cross-compilation</span></div>
-      <div class="skill-item"><span class="skill-name">Git</span><span class="skill-desc">version control, collaborative workflows</span></div>
-      <div class="skill-item"><span class="skill-name">Other</span><span class="skill-desc">GNUplot, ModelSim, Quartus, VSCode</span></div>
-    </div>
-
-    <div class="skills-group">
-      <h3>Transversal</h3>
-      <div class="skill-item"><span class="skill-name">Thinking</span><span class="skill-desc">analytical and synthetic problem solving</span></div>
-      <div class="skill-item"><span class="skill-name">Work ethic</span><span class="skill-desc">rigour, attention to detail, autonomous learning</span></div>
-      <div class="skill-item"><span class="skill-name">Teamwork</span><span class="skill-desc">project-based collaborative environments</span></div>
-    </div>
-  </section>
-
-  <!-- EXPERIENCE -->
-  <section id="experience">
-    <div class="section-label">03 / experience</div>
-    <h2>Professional Experience</h2>
-
-    <div class="card">
-      <div class="card-header">
-        <span class="card-title">Private Tutor — Cours Particuliers</span>
-        <span class="card-meta">Sept. 2024 – Present · Paris</span>
+        <aside class="hero-card" aria-label="Profile summary">
+          <img class="profile-photo" src="assets/profile.jpg" alt="Portrait of Bouama Mehdi">
+          <div class="signal-panel">
+            <p class="panel-label">Current focus</p>
+            <ul class="signal-list">
+              <li>Embedded C and STM32 low-level programming</li>
+              <li>FPGA/VHDL digital design and processor architecture</li>
+              <li>Linux-based robotics and autonomous vehicle software</li>
+            </ul>
+          </div>
+        </aside>
       </div>
-      <div class="card-sub">Mathematics, Physics &amp; Sciences · Primary School to Baccalauréat</div>
-      <p>
-        Providing one-on-one tutoring sessions for students ranging from primary school through
-        Baccalauréat level. Covering core subjects including mathematics, physics, and sciences,
-        with a focus on building strong fundamentals and exam readiness.
-      </p>
-    </div>
+    </section>
 
-    <div class="card">
-      <div class="card-header">
-        <span class="card-title">Stage Technicien — ENTV</span>
-        <span class="card-meta">June 2023 · Algiers</span>
-      </div>
-      <div class="card-sub">Algeria National Television Broadcaster</div>
-      <p>
-        Contributed to the maintenance, diagnosis, and troubleshooting of broadcast transmission equipment
-        at Algeria's national television broadcaster. Gained hands-on experience with professional-grade
-        electronic systems and fault-finding workflows in a demanding operational environment.
-      </p>
-    </div>
-
-    <div class="card">
-      <div class="card-header">
-        <span class="card-title">Member — Club Scientifique CELEC</span>
-        <span class="card-meta">Sept. 2022 – Jul. 2025</span>
-      </div>
-      <div class="card-sub">Student Electronics &amp; Embedded Systems Club</div>
-      <p>
-        Active member of a student scientific club focused on electronics and embedded systems.
-        Participated in collaborative projects including remote-controlled robots, combining hardware
-        design, firmware development, and team coordination.
-      </p>
-    </div>
-  </section>
-
-  <!-- PROJECTS -->
-  <section id="projects">
-    <div class="section-label">04 / projects</div>
-    <h2>Featured Projects</h2>
-
-    <div class="card">
-      <div class="card-header">
-        <span class="card-title">🤖 CoVAPSy — Autonomous 1/10-Scale Vehicle <span class="badge-wip">In Progress</span></span>
-        <span class="card-meta">M1 · Paris-Saclay</span>
-      </div>
-      <div class="tags">
-        <span class="tag tag-blue">Raspberry Pi 4</span>
-        <span class="tag tag-blue">STM32</span>
-        <span class="tag tag-blue">RPLidar A2M12</span>
-        <span class="tag tag-green">C</span>
-        <span class="tag tag-green">Python</span>
-        <span class="tag tag-green">pthreads</span>
-        <span class="tag tag-gray">PWM</span>
-        <span class="tag tag-gray">Real-time control</span>
-        <span class="tag tag-gray">PID</span>
-        <span class="tag tag-gray">Follow-the-Gap</span>
-      </div>
-      <p>
-        Developing a full embedded software stack for a 1/10-scale autonomous vehicle.
-        Responsibilities include real-time sensor integration (lidar), low-level STM32 motor control,
-        and implementing autonomous driving algorithms (PID, Follow-the-Gap) under strict performance
-        constraints. TER project for the Paris-Saclay autonomous car competition.
-      </p>
-    </div>
-
-    <div class="card">
-      <div class="card-header">
-        <span class="card-title">🤖 Teleoperated Robots / RC Cars</span>
-        <span class="card-meta">L3 · Personal &amp; Club</span>
-      </div>
-      <div class="tags">
-        <span class="tag tag-blue">STM32</span>
-        <span class="tag tag-blue">ESP32</span>
-        <span class="tag tag-green">C (bare metal)</span>
-        <span class="tag tag-gray">I2C</span>
-        <span class="tag tag-gray">SPI</span>
-        <span class="tag tag-gray">UART</span>
-        <span class="tag tag-gray">Custom PCB</span>
-        <span class="tag tag-gray">SMD Assembly</span>
-      </div>
-      <p>
-        Designed and built two remote-controlled robots from the ground up: full PCB design,
-        component selection, SMD soldering, and embedded firmware without any hardware abstraction
-        layer. Validated communication protocols and motor control in hardware.
-      </p>
-    </div>
-
-    <div class="card">
-      <div class="card-header">
-        <span class="card-title">🔢 RPN Calculator in C</span>
-        <span class="card-meta">L3 · Université Paris-Saclay</span>
-      </div>
-      <div class="tags">
-        <span class="tag tag-green">C</span>
-        <span class="tag tag-green">C Standard Library</span>
-        <span class="tag tag-gray">GNUplot</span>
-        <span class="tag tag-gray">Stack-based parser</span>
-        <span class="tag tag-gray">Data export</span>
-      </div>
-      <p>
-        Implemented a Reverse Polish Notation expression evaluator in C, including a stack-based parser,
-        data export functionality, and automatic graph generation via GNUplot. Focused on clean
-        architecture and correct memory management.
-      </p>
-    </div>
-  </section>
-
-  <!-- EDUCATION -->
-  <section id="education">
-    <div class="section-label">05 / education</div>
-    <h2>Education</h2>
-
-    <table class="edu-table">
-      <thead>
-        <tr>
-          <th>Degree</th>
-          <th>Institution</th>
-          <th>Period</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><strong>Master 1 — E3A</strong><br><small>Embedded Systems, FPGA, Architecture, AI</small></td>
-          <td>Université Paris-Saclay</td>
-          <td>Sept. 2025 – Present</td>
-        </tr>
-        <tr>
-          <td><strong>Licence 3 — Physics, E3A track</strong><br><small>Electronics, Energy, Automation</small></td>
-          <td>Université Paris-Saclay</td>
-          <td>Sept. 2024 – June 2025</td>
-        </tr>
-        <tr>
-          <td><strong>Licence — Electronics</strong></td>
-          <td>USTHB, Algiers</td>
-          <td>Sept. 2021 – June 2024</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <br>
-    <h3 style="margin-bottom: 12px; font-family: var(--mono); font-size: 0.78rem; color: var(--accent2); text-transform: uppercase; letter-spacing: 1px;">Languages</h3>
-    <div class="lang-row"><span class="lang-name">Arabic</span><span class="lang-level">Native</span></div>
-    <div class="lang-row"><span class="lang-name">French</span><span class="lang-level">C2 — TCF</span></div>
-    <div class="lang-row"><span class="lang-name">English</span><span class="lang-level">C1 — Linguaskill</span></div>
-  </section>
-
-  <!-- CONTACT -->
-  <section id="contact">
-    <div class="section-label">06 / contact</div>
-    <h2>Let's Connect</h2>
-    <p style="margin-bottom: 20px; font-size: 0.88rem;">
-      I am open to internship opportunities, research collaborations, and technical discussions
-      around embedded systems, FPGA design, and autonomous systems.
-    </p>
-    <div class="contact-grid">
-      <div class="contact-item">
-        <span class="contact-icon">📧</span>
+    <section class="section-band" id="about" aria-labelledby="about-title">
+      <div class="container split-section">
         <div>
-          <div class="contact-label">Email</div>
-          <div class="contact-value"><a href="mailto:mehdi.bouama.pro@gmail.com">mehdi.bouama.pro@gmail.com</a></div>
+          <p class="section-kicker">01 / Profile</p>
+          <h2 id="about-title">Hardware close to software</h2>
+        </div>
+        <div class="section-copy">
+          <p>
+            I am a Master 1 E3A student at Université Paris-Saclay, working toward embedded systems,
+            FPGA, processor architecture and low-level software. My strongest interests are systems
+            where code has to respect real hardware constraints.
+          </p>
+          <p>
+            My background combines electronics, microcontrollers, VHDL, Linux and C programming. I care
+            about understanding the full path from a signal, register or peripheral to the software layer
+            that controls it.
+          </p>
         </div>
       </div>
-      <div class="contact-item">
-        <span class="contact-icon">💼</span>
-        <div>
-          <div class="contact-label">LinkedIn</div>
-          <div class="contact-value"><a href="https://www.linkedin.com/in/mehdi-bouama/">linkedin.com/in/mehdi-bouama</a></div>
+    </section>
+
+    <section class="section-band projects-section" id="projects" aria-labelledby="projects-title">
+      <div class="container">
+        <div class="section-heading">
+          <p class="section-kicker">02 / Featured Projects</p>
+          <h2 id="projects-title">Projects that show the hardware/software profile</h2>
+        </div>
+
+        <div class="projects-grid">
+          <article class="project-card project-card-featured">
+            <div class="card-topline">
+              <span class="status status-active">Completed · 3rd place in the time-trial race</span>
+              <span class="card-meta">Course de Voitures Autonomes de Paris-Saclay 2026</span>
+            </div>
+            <h3>CoVAPSy · Autonomous 1/10-scale vehicle</h3>
+            <p class="project-lead">
+              Autonomous 1/10-scale race car developed for the Course de Voitures Autonomes de
+              Paris-Saclay 2026. I worked as autonomous navigation algorithm developer for the
+              time-trial event, using a reactive Python control loop on Raspberry Pi 4 with LiDAR
+              processing, steering/speed control, stuck recovery, telemetry logging and hardware
+              safety handling.
+            </p>
+            <dl class="project-facts">
+              <div>
+                <dt>Competition</dt>
+                <dd>Course de Voitures Autonomes de Paris-Saclay 2026.</dd>
+              </div>
+              <div>
+                <dt>Role</dt>
+                <dd>Autonomous navigation algorithm developer for the time-trial event.</dd>
+              </div>
+              <div>
+                <dt>Contribution</dt>
+                <dd>LiDAR processing, steering and speed control, stuck recovery, telemetry logging and safety handling.</dd>
+              </div>
+            </dl>
+            <div class="tag-row" aria-label="CoVAPSy stack">
+              <span>Raspberry Pi 4</span>
+              <span>STM32</span>
+              <span>RPLidar A2M12</span>
+              <span>Python</span>
+              <span>PWM</span>
+              <span>I2C</span>
+              <span>pthreads</span>
+            </div>
+            <a class="text-link" href="https://github.com/mahdidou711/mahdidou711-covapsy">View repository</a>
+          </article>
+
+          <article class="project-card">
+            <div class="card-topline">
+              <span class="status status-neutral">Embedded monitoring</span>
+              <span class="card-meta">ESP32-S3 · Flask · SQLite</span>
+            </div>
+            <h3>IAQ Dashboard V2</h3>
+            <p class="project-lead">
+              Indoor air quality monitoring dashboard using ESP32-S3 firmware, Flask backend, SQLite
+              storage and real-time charts.
+            </p>
+            <dl class="project-facts">
+              <div>
+                <dt>Context</dt>
+                <dd>Embedded sensing project with firmware, backend storage and live dashboard visualization.</dd>
+              </div>
+              <div>
+                <dt>Objective</dt>
+                <dd>Measure CO2, TVOC, CO, temperature and humidity, then display trends with alerts.</dd>
+              </div>
+              <div>
+                <dt>Contribution</dt>
+                <dd>ESP32-S3 data acquisition, HTTPS transmission, Flask API, SQLite persistence and chart interface.</dd>
+              </div>
+            </dl>
+            <div class="tag-row" aria-label="IAQ Dashboard V2 stack">
+              <span>ESP32-S3</span>
+              <span>Flask</span>
+              <span>SQLite</span>
+              <span>HTTPS</span>
+              <span>Chart.js</span>
+              <span>Sensor alerts</span>
+            </div>
+            <a class="text-link" href="https://github.com/mahdidou711/iaq-dashboard-v2">View repository</a>
+          </article>
+
+          <article class="project-card">
+            <div class="card-topline">
+              <span class="status status-neutral">Completed</span>
+              <span class="card-meta">C · SIMD experiments</span>
+            </div>
+            <h3>C Image Processing SIMD</h3>
+            <p class="project-lead">
+              Clean C image-processing project focused on BMP loading/writing, scalar implementations,
+              SIMD-oriented optimization experiments and baseline versus optimized comparisons.
+            </p>
+            <dl class="project-facts">
+              <div>
+                <dt>Context</dt>
+                <dd>Low-level image processing work around explicit memory access and performance comparison.</dd>
+              </div>
+              <div>
+                <dt>Objective</dt>
+                <dd>Compare scalar image-processing baselines with SIMD-oriented optimization experiments.</dd>
+              </div>
+              <div>
+                <dt>Contribution</dt>
+                <dd>BMP I/O usage, scalar kernels, optimized variants and result comparison workflow.</dd>
+              </div>
+            </dl>
+            <div class="tag-row" aria-label="C Image Processing SIMD stack">
+              <span>C</span>
+              <span>BMP</span>
+              <span>SIMD</span>
+              <span>Optimization</span>
+              <span>Benchmarking</span>
+            </div>
+            <a class="text-link" href="https://github.com/mahdidou711/c-image-processing-simd">View repository</a>
+          </article>
+
+          <article class="project-card">
+            <div class="card-topline">
+              <span class="status status-neutral">Completed</span>
+              <span class="card-meta">C · CLI</span>
+            </div>
+            <h3>RPN Calculator</h3>
+            <p class="project-lead">
+              Stack-based expression evaluator in C with infix-to-postfix conversion and plotting support.
+            </p>
+            <dl class="project-facts">
+              <div>
+                <dt>Context</dt>
+                <dd>Low-level C project focused on parsing, stack operations and clean module separation.</dd>
+              </div>
+              <div>
+                <dt>Objective</dt>
+                <dd>Evaluate arithmetic expressions and generate data for plotting functions of x.</dd>
+              </div>
+              <div>
+                <dt>Contribution</dt>
+                <dd>Implemented tokenizer, evaluator, shunting-yard conversion and CMake-based build.</dd>
+              </div>
+            </dl>
+            <div class="tag-row" aria-label="RPN calculator stack">
+              <span>C99</span>
+              <span>CMake</span>
+              <span>Stack</span>
+              <span>Parser</span>
+              <span>GNUplot</span>
+            </div>
+            <a class="text-link" href="https://github.com/mahdidou711/RPNcalculator">View repository</a>
+          </article>
+        </div>
+
+        <div class="section-heading section-heading-secondary">
+          <p class="section-kicker">Selected Work</p>
+          <h3 id="other-projects-title">Other Projects</h3>
+        </div>
+
+        <div class="projects-grid projects-grid-compact" aria-labelledby="other-projects-title">
+          <article class="project-card project-card-muted">
+            <div class="card-topline">
+              <span class="status status-neutral">Python</span>
+              <span class="card-meta">Computer vision</span>
+            </div>
+            <h3>Computer Vision Algorithms</h3>
+            <p class="project-lead">
+              Python implementations of classical computer vision algorithms, including circle detection,
+              Harris and FAST corners, ZMSSD matching, homography estimation and panorama generation.
+            </p>
+            <div class="tag-row" aria-label="Computer Vision Algorithms stack">
+              <span>Python</span>
+              <span>Harris</span>
+              <span>FAST</span>
+              <span>Homography</span>
+              <span>Panorama</span>
+            </div>
+            <a class="text-link" href="https://github.com/mahdidou711/computer-vision-algorithms-python">View repository</a>
+          </article>
+
+          <article class="project-card project-card-muted">
+            <div class="card-topline">
+              <span class="status status-neutral">C++17</span>
+              <span class="card-meta">OOP · Data structures</span>
+            </div>
+            <h3>C++ OOP and Data Structures</h3>
+            <p class="project-lead">
+              Clean C++17 collection around object-oriented programming and data structures, including
+              fractions, matrices, sensor buffers, lists, trees and small solver modules.
+            </p>
+            <div class="tag-row" aria-label="C++ OOP and Data Structures stack">
+              <span>C++17</span>
+              <span>OOP</span>
+              <span>Templates</span>
+              <span>Lists</span>
+              <span>Trees</span>
+            </div>
+            <a class="text-link" href="https://github.com/mahdidou711/cpp-oop-data-structures">View repository</a>
+          </article>
+
+          <article class="project-card project-card-muted">
+            <div class="card-topline">
+              <span class="status status-neutral">Static site</span>
+              <span class="card-meta">GitHub Pages</span>
+            </div>
+            <h3>Portfolio Website</h3>
+            <p class="project-lead">
+              Static portfolio built with HTML and CSS, focused on fast loading, accessibility,
+              responsive layout and clear technical positioning.
+            </p>
+            <div class="tag-row" aria-label="Portfolio Website stack">
+              <span>HTML</span>
+              <span>CSS</span>
+              <span>SEO</span>
+              <span>Accessibility</span>
+              <span>GitHub Pages</span>
+            </div>
+            <a class="text-link" href="https://github.com/mahdidou711/mahdidou711.github.io">View repository</a>
+          </article>
         </div>
       </div>
-      <div class="contact-item">
-        <span class="contact-icon">🐙</span>
-        <div>
-          <div class="contact-label">GitHub</div>
-          <div class="contact-value"><a href="https://github.com/mahdidou711">github.com/mahdidou711</a></div>
+    </section>
+
+    <section class="section-band" id="skills" aria-labelledby="skills-title">
+      <div class="container">
+        <div class="section-heading">
+          <p class="section-kicker">03 / Technical Skills</p>
+          <h2 id="skills-title">Practical stack by engineering area</h2>
+        </div>
+
+        <div class="skills-grid">
+          <article class="skill-card">
+            <h3>Embedded C / STM32</h3>
+            <p>C, CMSIS-oriented programming, registers, timers, PWM, GPIO, interrupts, UART, SPI and I2C.</p>
+          </article>
+          <article class="skill-card">
+            <h3>FPGA / Digital Design</h3>
+            <p>VHDL, RTL design, finite-state machines, arithmetic units, ModelSim simulation and Quartus workflow.</p>
+          </article>
+          <article class="skill-card">
+            <h3>Linux / Low-Level Tools</h3>
+            <p>Linux daily environment, shell, Git, CMake, GCC, cross-compilation basics and Raspberry Pi development.</p>
+          </article>
+          <article class="skill-card">
+            <h3>Autonomous Systems</h3>
+            <p>Lidar processing, PWM actuation, sensor integration, control logic, calibration and robotics debugging.</p>
+          </article>
+          <article class="skill-card">
+            <h3>Scientific Python</h3>
+            <p>Python, NumPy, Matplotlib, PyTorch basics, signal/image processing and data analysis workflows.</p>
+          </article>
+          <article class="skill-card">
+            <h3>Engineering Methods</h3>
+            <p>Hardware validation, structured debugging, clear documentation and project-based collaboration.</p>
+          </article>
         </div>
       </div>
-      <div class="contact-item">
-        <span class="contact-icon">📍</span>
+    </section>
+
+    <section class="section-band" id="experience" aria-labelledby="experience-title">
+      <div class="container split-section">
         <div>
-          <div class="contact-label">Location</div>
-          <div class="contact-value">Orsay, France</div>
+          <p class="section-kicker">04 / Experience</p>
+          <h2 id="experience-title">Technical and teaching experience</h2>
+        </div>
+        <div class="timeline">
+          <article class="timeline-item">
+            <p class="timeline-date">Sept. 2024 - Present · Paris area</p>
+            <h3>Private Tutor · Mathematics, physics and sciences</h3>
+            <p>
+              One-to-one tutoring for students from primary school to high-school level, focused on fundamentals,
+              method and exam preparation.
+            </p>
+          </article>
+          <article class="timeline-item">
+            <p class="timeline-date">June 2023 · Algiers</p>
+            <h3>Technician Internship · ENTV</h3>
+            <p>
+              Observed and contributed to maintenance, diagnosis and troubleshooting workflows on broadcast
+              transmission equipment.
+            </p>
+          </article>
+          <article class="timeline-item">
+            <p class="timeline-date">Sept. 2022 - July 2025 · USTHB</p>
+            <h3>Member · Club Scientifique CELEC</h3>
+            <p>
+              Participated in electronics and embedded systems projects, including remote-controlled robot work
+              and collaborative prototyping.
+            </p>
+          </article>
         </div>
       </div>
+    </section>
+
+    <section class="section-band" id="education" aria-labelledby="education-title">
+      <div class="container">
+        <div class="section-heading">
+          <p class="section-kicker">05 / Education</p>
+          <h2 id="education-title">Academic path</h2>
+        </div>
+        <div class="education-grid">
+          <article class="education-card">
+            <p class="timeline-date">Sept. 2025 - Present</p>
+            <h3>Master 1 E3A</h3>
+            <p>Université Paris-Saclay · Embedded systems, FPGA, processor architecture, signal processing and AI.</p>
+          </article>
+          <article class="education-card">
+            <p class="timeline-date">Sept. 2024 - June 2025</p>
+            <h3>Licence 3 · Physics, E3A track</h3>
+            <p>Université Paris-Saclay · Electronics, energy, automation and applied physics.</p>
+          </article>
+          <article class="education-card">
+            <p class="timeline-date">Sept. 2021 - June 2024</p>
+            <h3>Licence · Electronics</h3>
+            <p>USTHB, Algiers · Electronics foundations and practical embedded systems work.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-band contact-section" id="contact" aria-labelledby="contact-title">
+      <div class="container contact-grid">
+        <div>
+          <p class="section-kicker">06 / Contact</p>
+          <h2 id="contact-title">Open to embedded systems internships and technical opportunities</h2>
+          <p>
+            Best fit: embedded software, FPGA/VHDL, low-level C, STM32, Linux-based systems and autonomous robotics.
+          </p>
+        </div>
+        <div class="contact-list" aria-label="Contact links">
+          <a href="mailto:mehdi.bouama.pro@gmail.com">
+            <span>Email</span>
+            <strong>mehdi.bouama.pro@gmail.com</strong>
+          </a>
+          <a href="https://www.linkedin.com/in/mehdi-bouama/">
+            <span>LinkedIn</span>
+            <strong>linkedin.com/in/mehdi-bouama</strong>
+          </a>
+          <a href="https://github.com/mahdidou711">
+            <span>GitHub</span>
+            <strong>github.com/mahdidou711</strong>
+          </a>
+          <div class="contact-static">
+            <span>Location</span>
+            <strong>Orsay / Paris-Saclay area, France</strong>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>© 2026 Bouama Mehdi</p>
+      <p>Built with HTML/CSS and hosted on GitHub Pages.</p>
     </div>
-  </section>
-
-</div>
-</main>
-
-<!-- ══ FOOTER ══ -->
-<footer>
-  <div class="container">
-    <span>mahdidou711</span>.github.io — last updated <span>2026</span>
-  </div>
-</footer>
-
+  </footer>
 </body>
 </html>
