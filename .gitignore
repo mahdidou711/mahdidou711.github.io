@@ -1,1 +1,14 @@
 CLAUDE.md
+
+# Local AI assistant files
+CLAUDE.md
+.codex/
+.agents/
+.claude/
+
+# Local CV exports
+*.pdf
+
+# OS/editor files
+.DS_Store
+.vscode/
