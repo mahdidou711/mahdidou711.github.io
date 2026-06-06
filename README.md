@@ -1,46 +1,32 @@
-# Bouama Mehdi Portfolio
+# Portfolio V2 — Bouama Mehdi
 
-Static GitHub Pages portfolio for Bouama Mehdi, focused on embedded systems,
-FPGA/VHDL, low-level C, STM32, Linux and autonomous systems.
+Portfolio React/TanStack Start de Bouama Mehdi, orienté électronique, FPGA et logiciel embarqué.
 
-## Public URL
-
-<https://mahdidou711.github.io/>
-
-## Stack
-
-- HTML
-- CSS
-- GitHub Pages
-
-No frontend framework or build step is required.
-
-## Local Test
+## Développement local
 
 ```bash
-python3 -m http.server 8000
+npm install
+npm run dev
 ```
 
-Then open:
+## Build
 
-```text
-http://localhost:8000
+```bash
+npm run build
 ```
 
-## Main Links
+## Preview locale
 
-- GitHub: <https://github.com/mahdidou711>
-- LinkedIn: <https://www.linkedin.com/in/mehdi-bouama/>
-- CoVAPSy: <https://github.com/mahdidou711/mahdidou711-covapsy>
-- IAQ Dashboard V2: <https://github.com/mahdidou711/iaq-dashboard-v2>
-- C Image Processing SIMD: <https://github.com/mahdidou711/c-image-processing-simd>
-- RPN Calculator: <https://github.com/mahdidou711/RPNcalculator>
-- Computer Vision Algorithms: <https://github.com/mahdidou711/computer-vision-algorithms-python>
-- C++ OOP and Data Structures: <https://github.com/mahdidou711/cpp-oop-data-structures>
-- Portfolio Website: <https://github.com/mahdidou711/mahdidou711.github.io>
+```bash
+npm run preview
+```
 
-## Notes
+## Déploiement
 
-- `assets/profile.jpg` is the optimized web image used by the site.
-- The original profile photo with EXIF/GPS metadata is intentionally not kept in
-  this branch.
+Le projet est prévu pour être connecté à Vercel depuis GitHub.
+
+- Build command: `npm run build`
+- Install command: `npm install`
+- Root directory: racine du repository
+
+L’ancien portfolio HTML/CSS est conservé dans `legacy-v1/`.
