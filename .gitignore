@@ -49,3 +49,4 @@ CLAUDE.md
 # OS/editor files
 .DS_Store
 .vscode/
+.vercel
