@@ -46,7 +46,7 @@ export function CovapsyVisual() {
           <rect x="110" y="20" width="80" height="22" rx="4" stroke="currentColor" strokeWidth="0.75" fill="none" />
           <text x="150" y="35" textAnchor="middle">STM32</text>
           <rect x="200" y="20" width="38" height="22" rx="4" stroke="currentColor" strokeWidth="0.75" fill="none" />
-          <text x="219" y="35" textAnchor="middle" opacity="0.6">I²C</text>
+          <text x="219" y="35" textAnchor="middle">I²C</text>
           <rect x="248" y="20" width="100" height="22" rx="4" stroke="currentColor" strokeWidth="0.75" fill="none" />
           <text x="298" y="35" textAnchor="middle">RPLidar A2M12</text>
         </g>
